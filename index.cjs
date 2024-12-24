@@ -9,11 +9,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "/public")))
 
 
-
 app.listen(port,(req,res)=>{
     console.log("Server is listening to : ",port);
 });
-
 
 
 app.get("/",(req,res)=>{
