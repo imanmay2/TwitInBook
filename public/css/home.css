@@ -6,9 +6,10 @@ body{
 
 
 .sidebar{
-    height:700px;
-    width:50px;
-    border-radius: 10px;
+    height:650px;
+    width:25px;
+    /* border-radius: 10px; */
+    border-right-style: double;
 }
 
 .playwrite-co-guides-regular {
@@ -30,20 +31,25 @@ body{
   }
   
 
-/* .material-symbols-outlined {
+.material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
   'opsz' 24;
   color: white;
-} */
+}
+
+
+p{
+    margin-bottom: -45px;
+}
+
 
 .logo{
     height: 40px;
     width: 40px;
     border-radius: 12px;
-    margin-bottom: -10px;
-    margin-left:4px;
-    margin-right: 5px;
+   
 }
+
