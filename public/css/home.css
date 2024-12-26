@@ -10,3 +10,40 @@ body{
     width:50px;
     border-radius: 10px;
 }
+
+.playwrite-co-guides-regular {
+    font-family: "Playwrite CO Guides", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .tangerine-regular {
+    font-family: "Tangerine", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .tangerine-bold {
+    font-family: "Tangerine", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+
+/* .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  color: white;
+} */
+
+.logo{
+    height: 40px;
+    width: 40px;
+    border-radius: 12px;
+    margin-bottom: -10px;
+    margin-left:4px;
+    margin-right: 5px;
+}
