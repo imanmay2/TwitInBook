@@ -1,0 +1,67 @@
+
+
+.sidebar{
+    height:700px;
+    width:260px;
+    border-right-style:solid;
+}
+
+.top-brand-logo {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.sidebar-items {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-items-title {
+    font-size: 20px;
+}
+.playwrite-co-guides-regular {
+    font-family: "Playwrite CO Guides", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .tangerine-regular {
+    font-family: "Tangerine", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .tangerine-bold {
+    font-family: "Tangerine", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+
+p{
+    margin-bottom: -45px;
+}
+
+
+.logo{
+    height: 50px;
+    width: 50px;
+    border-radius: 12px;
+   
+}
+
+.material-icons {
+    font-size: 35px !important;
+}
+
+.icon {
+  font-size: 36px;
+  margin-right: 10px;
+  color: #ffffff;
+}
+
+tr {
+  display: block;
+  margin-bottom: 20px;
+}
