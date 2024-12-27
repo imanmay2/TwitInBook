@@ -15,5 +15,5 @@ app.listen(port,(req,res)=>{
 
 
 app.get("/",(req,res)=>{
-    res.render("home.ejs");
+    res.render("master.ejs");
 });
