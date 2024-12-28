@@ -1,0 +1,38 @@
+.rightbar_container{
+    margin-left: 167px;
+    height: 703px;
+    padding-left: 20px;
+    /* margin-top: 20px; */
+    border-left-style: double;
+}
+
+/* .search{
+    border-radius: 30px;
+    height:36px;
+    width: 302px;
+    background-color: rgb(49, 50, 50);
+    color: white;
+} */
+
+.whats_happening{
+    width:340px;
+    height:76px;
+    background-color: black;
+    color: white;
+    border: none !important;
+    /* border-color:azure;
+    border-radius: 30px; */
+    font-size:20px;
+    padding:10px;
+  }
+
+
+  .post_button{
+    margin-left:273px !important;
+    margin-top: 10px !important;
+    border-radius: 20px;
+    color: wheat;
+    background-color: black;
+  }
+
+

@@ -2,7 +2,7 @@
 
 .sidebar{
     height:700px;
-    width:260px;
+    width:267px;
     border-right-style:solid;
 }
 
@@ -26,12 +26,14 @@
     font-style: normal;
   }
   
+
   .tangerine-regular {
     font-family: "Tangerine", serif;
     font-weight: 400;
     font-style: normal;
   }
   
+
   .tangerine-bold {
     font-family: "Tangerine", serif;
     font-weight: 700;
@@ -51,9 +53,11 @@ p{
    
 }
 
+
 .material-icons {
     font-size: 35px !important;
 }
+
 
 .icon {
   font-size: 36px;
@@ -61,7 +65,15 @@ p{
   color: #ffffff;
 }
 
+
 tr {
   display: block;
   margin-bottom: 20px;
+}
+
+
+.sidebar_container{
+  
+  height: 700px;
+  width: 260px;
 }

@@ -1,0 +1,36 @@
+.home_container{
+    margin-left : 45px !important;
+    margin-top: 12px !important;
+    height: 703px;
+    width: 730px;
+}
+
+
+.playwrite-co-guides-regular {
+    font-family: "Playwrite CO Guides", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+  .tangerine-bold {
+    font-family: "Tangerine", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .para_data{
+    
+  }
+
+.post_para{
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-left:58px;
+  width:400px;
+}
+
+
+#opacity{
+    opacity: 0.8;
+  }

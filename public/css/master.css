@@ -3,3 +3,11 @@ body{
     font-weight:200;
     color: blanchedalmond;
 }
+
+.components {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
