@@ -1,41 +1,42 @@
-.home_container{
-    margin-left : 45px;
-    margin-top: 12px;
-    margin-right: 20px;
+.home_container {
+  margin-left: 45px;
+  margin-top: 12px;
+  margin-right: 20px;
 }
 
 
 .playwrite-co-guides-regular {
-    font-family: "Playwrite CO Guides", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
+  font-family: "Playwrite CO Guides", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  .tangerine-bold {
-    font-family: "Tangerine", serif;
-    font-weight: 700;
-    font-style: normal;
-  }
 
-  .para_data{
-    
-  }
+.tangerine-bold {
+  font-family: "Tangerine", serif;
+  font-weight: 700;
+  font-style: normal;
+}
 
-.post_para{
+.post_para {
   letter-spacing: 1px;
-  margin-left:38px;
+  margin-left: 38px;
 
 }
 
 
-#opacity{
-    opacity: 0.8;
-  }
+#opacity {
+  opacity: 0.8;
+}
 
-  .roboto-thin {
-    font-family: "Roboto", serif;
-    font-weight: 100;
-    font-style: normal;
-  }
-  
+.roboto-thin {
+  font-family: "Roboto", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  gap: 5px
+}
