@@ -1,8 +1,7 @@
 .home_container{
-    margin-left : 45px !important;
-    margin-top: 12px !important;
-    height: 703px;
-    width: 730px;
+    margin-left : 45px;
+    margin-top: 12px;
+    margin-right: 20px;
 }
 
 
@@ -24,13 +23,19 @@
   }
 
 .post_para{
-  line-height: 20px;
   letter-spacing: 1px;
-  margin-left:58px;
-  width:400px;
+  margin-left:38px;
+
 }
 
 
 #opacity{
     opacity: 0.8;
   }
+
+  .roboto-thin {
+    font-family: "Roboto", serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  

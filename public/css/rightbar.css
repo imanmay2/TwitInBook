@@ -1,8 +1,6 @@
 .rightbar_container{
-    margin-left: 167px;
     height: 703px;
     padding-left: 20px;
-    /* margin-top: 20px; */
     border-left-style: double;
 }
 
@@ -23,7 +21,7 @@
     /* border-color:azure;
     border-radius: 30px; */
     font-size:20px;
-    padding:10px;
+   
   }
 
 
@@ -31,8 +29,10 @@
     margin-left:273px !important;
     margin-top: 10px !important;
     border-radius: 20px;
-    color: wheat;
-    background-color: black;
+    color:black;
+    background-color: wheat;
+    opacity: 0.8;
+    padding: 9px 20px 9px 20px;
   }
 
 
