@@ -59,6 +59,10 @@ p{
     font-size: 35px !important;
 }
 
+.material-icons-outlined {
+    font-size: 35px !important;
+}
+
 
 .icon {
   font-size: 36px;
@@ -74,7 +78,6 @@ tr {
 
 
 .sidebar_container{
-  
   height: 700px;
   width: 260px;
 }

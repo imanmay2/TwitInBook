@@ -1,15 +1,14 @@
 <body>
-
-
    <div class="home_container">
       <h1> Your Posts</h1>
       <br>
-      <div class="user-details">
-         <i class="material-icons dp_post" style="font-size: 50px;">account_circle</i>
-         <b>Manmay Chakraborty</b><i id="opacity"> @imanmay2 . Dec 28, 2024</i>
-         </div>
-         <p class="post_para roboto-thin">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste accusantium suscipit tenetur molestiae, architecto quae vitae officia quam temporibus minima delectus blanditiis, ipsam excepturi? Ex magni ullam consequuntur ea delectus! </p>   
+      <% for(let i=0;i<=4;i++){ %>
+         <%- include("./components/post") %>
+         <br>
+         
+     <% } %>
+      
+      <br>
       <!-- <hr width="100%"> -->
    </div>
 </body>

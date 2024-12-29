@@ -2,7 +2,7 @@
   height: 703px;
   padding-left: 20px;
   margin-right: 5px;
-  border-left-style: double;
+  border-left-style: solid;
 }
 
 /* .search{
@@ -20,7 +20,12 @@
   /* border-color:azure;
     border-radius: 30px; */
   font-size: 20px;
+  resize: none;
+  width: 100%;
+}
 
+.whats_happening:focus{
+  outline: none;
 }
 
 
@@ -30,7 +35,6 @@
   border-radius: 20px;
   color: black;
   background-color: wheat;
-  opacity: 0.8;
   padding: 9px 20px 9px 20px;
 }
 
@@ -46,3 +50,4 @@
 .post_profile_icon {
   font-size: 50px !important;
 }
+
