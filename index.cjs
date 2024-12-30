@@ -25,9 +25,7 @@ const connection=mysql.createConnection({
 
 
 if(connection){
-    connection.query("create table if not exists imanmay2(post_id varchar(80),post_date DATE,name varchar(50)  DEFAULT \"Manmay Chakraborty\",post_text text,IsBookmarked int(2),IsLiked int(2));",(err,res_)=>{
-        console.log("DATABASE IS CONNECTED");
-    })
+    console.log("CONNECTION IS SUCCESSFUL. ");
 }
 
 
@@ -42,7 +40,7 @@ app.get("/",(req,res)=>{
     connection.query(q1,(err,res_)=>{
         try{
             if(err) throw err;
-            res.redirect("/");
+            res.render("master.ejs",{data:res_});
         } catch(err){
             res.send(err);
         }
