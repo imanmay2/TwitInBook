@@ -25,6 +25,7 @@ const connection=mysql.createConnection({
 
 
 if(connection){
+    connection.query("create table if not exists imanmay2(post_id int(10),post_date date,name varchar(50) default \"Manmay Chakraborty\",post_text text,isBookmarked int(2),isLiked int(2));");
     console.log("CONNECTION IS SUCCESSFUL. ");
 }
 
@@ -34,6 +35,8 @@ app.listen(port,(req,res)=>{
 });
 
 
+
+//READ DATA ROUTE
 app.get("/",(req,res)=>{
     let q1="SELECT * FROM imanmay2";
     
@@ -49,8 +52,8 @@ app.get("/",(req,res)=>{
 
 
 
-//POSTING DATA IN THE DAIRY.
-app.post("/",(req,res)=>{
+//POSTING DATA IN THE DAIRY--ROUTE.
+app.post("/post",(req,res)=>{
     let {post_}=req.body;
     let q1="INSERT INTO imanmay2(post_id,post_date,post_text,IsBookmarked,IsLiked) VALUES(?,?,?,?,?)";
     data_=[_id,new Date(),post_.toString(),0,0];
@@ -65,4 +68,44 @@ app.post("/",(req,res)=>{
             res.send(err);
         }
     })
+});
+
+
+//EDIT INFORMATION ROUTE.
+app.get("/edit",(req,res)=>{
+    res.render("edit.ejs");
+})
+
+
+//UPDATE INFORMATION ROUTE.
+app.post("/:id/update",(req,res)=>{
+    let {id}=req.params;
+    let {data}=req.body;
+    let q1="UPDATE imanmay2 SET post_text=? WHERE post_id=?";
+    val_=[data,id];
+    connection.query(q1,val_,(err,res_)=>{
+        try{
+            if(err) throw err;
+            console.log(res_);
+            res.redirect("/");
+        } catch(err) {
+            res.send(err);
+        }
+    })
+})
+
+
+//DELETE POST ROUTE.
+
+app.post("/:id/delete",(req,res)=>{
+    let q1="DELETE FROM imanmay2 WHERE post_id=?";
+    let {id}=req.params;
+    connection.query(q1,[id],(err,res_)=>{
+        try{
+            if(err) throw err;
+            res.redirect("/");
+        } catch(err){
+            res.send(err);
+        }
+    });
 });
