@@ -54,7 +54,15 @@
 .user-details {
   display: flex;
   align-items: center;
+  
   gap: 5px
+}
+
+.post_metadata{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .box_post {

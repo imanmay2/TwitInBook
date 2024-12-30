@@ -38,8 +38,10 @@ if (connection) {
 
     //SETTING UP THE ID. 
     connection.query("select * from imanmay2", (err, res) => {
-        let idx = res.length - 1;
-        _id = res[idx].post_id + 1;
+        if (res.length > 0) {
+            let idx = res.length - 1;
+            _id = res[idx].post_id + 1;
+        } else _id = 1;
     });
 }
 
@@ -56,7 +58,7 @@ app.get("/", (req, res) => {
     connection.query(q1, (err, res_) => {
         try {
             if (err) throw err;
-            res.render("master.ejs", { data: res_,getDate });
+            res.render("master.ejs", { data: res_, getDate });
         } catch (err) {
             res.send(err);
         }
