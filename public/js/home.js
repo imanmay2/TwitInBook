@@ -1,4 +1,4 @@
-const home = document.getElementById("home_container");
+const home = document.getElementById("post_list");
 
 document.addEventListener('wheel',(event)=>{
     home.scrollTop += event.deltaY;

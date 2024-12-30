@@ -1,13 +1,22 @@
 .home_container {
-  height: 100vh !important;
   margin-left: 20px;
   padding-left: 25px;
   margin-top: 12px;
   margin-right: 10px;
   padding-right: 10px;
-  overflow-y: auto;
 }
 
+.heading {
+  position: fixed;
+}
+
+#post_list{
+  height: 80vh;
+  margin-top: 15%;
+  overflow-y: auto;
+  margin-left: -30px;
+  padding-left: 25px;
+}
 
 .playwrite-co-guides-regular {
   font-family: "Playwrite CO Guides", serif;
@@ -47,16 +56,6 @@
   gap: 5px
 }
 
-
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-}
-
-
 .box_post {
   padding: 10px;
   background-color: wheat;
@@ -66,24 +65,10 @@
 
 }
 
-/* .like{
-  margin-right: -312px;
-  margin-left: 36px;
-}
-
-.share{
-  margin-left : 180px;
-}
-
-.bookmark{
-  margin-left: 208px;
-} */
-
 .post_icons {
   margin-left: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 10px !important;
 }
