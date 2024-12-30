@@ -2,6 +2,7 @@ body{
     background-color: black;
     font-weight:200;
     color: blanchedalmond;
+    overflow: hidden;
 }
 
 .components {
