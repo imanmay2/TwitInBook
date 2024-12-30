@@ -13,6 +13,7 @@ const ejsMate=require("ejs-mate");
 app.engine("ejs",ejsMate);
 const mysql=require("mysql2");
 
+let _id=1;
 
 const connection=mysql.createConnection({
     host:HOST,
@@ -22,13 +23,12 @@ const connection=mysql.createConnection({
 });
 
 
-if(connection){
-    console.log("Database is connected successfully.");
-}
-else{
-    console.log("Database not connected. ");
-}
 
+if(connection){
+    connection.query("create table if not exists imanmay2(post_id varchar(80),post_date DATE,name varchar(50)  DEFAULT \"Manmay Chakraborty\",post_text text,IsBookmarked int(2),IsLiked int(2));",(err,res_)=>{
+        console.log("DATABASE IS CONNECTED");
+    })
+}
 
 
 app.listen(port,(req,res)=>{
@@ -37,5 +37,34 @@ app.listen(port,(req,res)=>{
 
 
 app.get("/",(req,res)=>{
-    res.render("master.ejs");
+    let q1="SELECT * FROM imanmay2";
+    
+    connection.query(q1,(err,res_)=>{
+        try{
+            if(err) throw err;
+            res.redirect("/");
+        } catch(err){
+            res.send(err);
+        }
+    });
+});
+
+
+
+//POSTING DATA IN THE DAIRY.
+app.post("/",(req,res)=>{
+    let {post_}=req.body;
+    let q1="INSERT INTO imanmay2(post_id,post_date,post_text,IsBookmarked,IsLiked) VALUES(?,?,?,?,?)";
+    data_=[_id,new Date(),post_.toString(),0,0];
+    _id=_id+1;
+    connection.query(q1,data_,(err,res_)=>{
+        try{
+            if(err) throw err;
+            res.redirect("/");
+            // res.render("master.ejs",{data:res_});
+        }
+        catch(err){
+            res.send(err);
+        }
+    })
 });

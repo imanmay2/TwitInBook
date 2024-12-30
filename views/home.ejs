@@ -1,16 +1,15 @@
 <body>
    <div class="home_container" id="home_container">
       <h1 class="heading"> Your Posts</h1>
-      
       <br>
       <div id="post_list">
-      <% for(let i=0;i<=4;i++){ %>
-         <%- include("./components/post") %>
+      <% for(let i of data){ %>
+         <%- include("./components/post",{i:i}) %>
          <br>
          
      <% } %>
    </div>
       <br>
-      <!-- <hr width="100%"> -->
+
    </div>
 </body>

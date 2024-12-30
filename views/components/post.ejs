@@ -1,13 +1,12 @@
+<!-- <% for(let i of data) { %> -->
 <div class="box_post">
     <div class="user-details">
        <i class="material-icons dp_post" style="font-size: 50px;">account_circle</i>
-       <b>Manmay Chakraborty</b><i id="opacity"> @imanmay2</i> . Dec 28, 2024
+       <b><%=i.name %></b><i id="opacity"> @imanmay2</i> . <%=i.post_date %>
     </div>
+
     <p class="post_para roboto-thin">
-       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-       Iste accusantium suscipit tenetur molestiae, architecto quae vitae officia quam temporibus minima delectus
-       blanditiis,
-       ipsam excepturi? Ex magni ullam consequuntur ea delectus! </p> <br> <br> <br>
+      <%=i.post_text %> </p> <br> <br> <br>
     <div class="post_icons">
        <i class="material-icons-outlined like">
           thumb_up
@@ -17,3 +16,6 @@
           bookmark_outlined
        </i>
     </div></div>
+
+
+    <!-- <% } %>  -->
