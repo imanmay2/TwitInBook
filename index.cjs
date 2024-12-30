@@ -13,7 +13,7 @@ const ejsMate=require("ejs-mate");
 app.engine("ejs",ejsMate);
 const mysql=require("mysql2");
 
-let _id=1;
+let _id=0;
 
 const connection=mysql.createConnection({
     host:HOST,
@@ -34,6 +34,14 @@ app.listen(port,(req,res)=>{
     console.log("Server is listening to : ",port);
 });
 
+
+
+
+//SETTING UP THE ID. 
+connection.query("select * from imanmay2",(err,res)=>{
+    _id=res.length+1
+    console.log(_id);
+});
 
 
 //READ DATA ROUTE
