@@ -92,9 +92,6 @@
   z-index: 10;
 }
 
-.more:hover .dropdown-menu{
-  display: block;
-}
 
 .dropdown-menu ul {
   margin: 0;

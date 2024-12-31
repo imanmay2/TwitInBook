@@ -7,7 +7,7 @@
          </b><i id="opacity"> @imanmay2</i> . <%=getDate(i.post_date) %>
       </div>
       
-      <i class="material-icons more">more_vert <div class="dropdown-menu">
+      <i class="material-icons" style="cursor: pointer;" id="more">more_vert <div class="dropdown-menu" id="dropdown-menu">
          <ul>
             <form action="/<%= i.post_id %>/edit" method="POST">
                <li><button type="submit" style="all: unset;cursor: pointer;">Edit</button></li></form>
