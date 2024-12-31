@@ -6,13 +6,16 @@
             <%=i.name %>
          </b><i id="opacity"> @imanmay2</i> . <%=getDate(i.post_date) %>
       </div>
+      
       <i class="material-icons more">more_vert <div class="dropdown-menu">
          <ul>
-            <li>Edit</li>
-            <li onclick="hiddenPostAction()">Delete</li>
+            <form action="/<%= i.post_id %>/edit" method="POST">
+               <li><button type="submit" style="all: unset;cursor: pointer;">Edit</button></li></form>
+            <form action="/<%= i.post_id %>/delete" method="POST">
+            <li><button type="submit" style="all: unset;cursor: pointer;">Delete</button></li></form>
          </ul>
       </div></i>
-      <form id="hiddenPostAction" action="/<%= i.post_id %>/delete" method="POST" style="display: none;"></form>
+      
 
    </div>
 

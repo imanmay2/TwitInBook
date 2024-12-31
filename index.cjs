@@ -90,8 +90,8 @@ app.post("/post", (req, res) => {
 
 
 //EDIT INFORMATION ROUTE.
-app.get("/edit", (req, res) => {
-    res.render("edit.ejs");
+app.get("/:id/edit", (req, res) => {
+    res.render("edit.ejs",{data: req.params.id});
 })
 
 
