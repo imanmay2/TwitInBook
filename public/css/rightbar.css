@@ -51,6 +51,8 @@
 
 
 .post_profile_icon {
-  font-size: 50px !important;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
 

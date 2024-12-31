@@ -1,6 +1,6 @@
 #overlay{
     position: fixed; 
-    display: none !important; /* Hidden by default */
+    display: none !important;
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0;

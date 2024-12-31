@@ -28,3 +28,15 @@ document.addEventListener('click', () => {
         menu.style.display = 'none';
     });
 });
+
+
+const edit_POST = document.getElementById('edit_POST');
+const overlay = document.getElementById('overlay');
+const cancel = document.getElementById('cancel');
+overlay.style.display = 'none';
+edit_POST.addEventListener('click',()=>{
+    overlay.style.display = 'flex !important';
+})
+cancel.addEventListener('click',()=>{
+    overlay.style.display = 'none !important';
+})

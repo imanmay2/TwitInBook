@@ -15,6 +15,11 @@ const mysql = require("mysql2");
 
 
 let _id = null;
+let TOTALPOSTS = 0;
+let TOTALLIKES = 0;
+let TOTALBOOKMARKS = 0;
+let USERNAME = "";
+let USERID = "";
 
 //Function for Date function.
 function getDate(date) {
@@ -51,13 +56,6 @@ if (connection) {
     connection.query("create table if not exists imanmay2(post_id int(10),post_date date,name varchar(50) default \"Manmay Chakraborty\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);");
     console.log("CONNECTION IS SUCCESSFUL. ");
 
-    //SETTING UP THE ID. 
-    connection.query("select * from imanmay2", (err, res) => {
-        if (res.length > 0) {
-            let idx = res.length - 1;
-            _id = res[idx].post_id + 1;
-        } else _id = 1;
-    });
 }
 
 
@@ -68,15 +66,40 @@ app.listen(port, (req, res) => {
 
 //READ DATA ROUTE
 app.get("/", (req, res) => {
+    TOTALBOOKMARKS=0;
+    TOTALLIKES=0;
+    connection.query("SELECT * FROM userdetails",(err,result_)=>{
+        try{
+            if(err) throw err;
+            USERNAME = result_[0].name;
+            USERID = result_[0].userid;
+        } catch(err){
+            res.send(err);
+        }
+    });
     let q1 = "SELECT * FROM imanmay2";
     connection.query(q1, (err, res_) => {
+        // console.log(res_);
+        for(let i of res_){
+            if(i.isBookmarked){
+                TOTALBOOKMARKS+=1;
+            }
+            i.isLiked ? TOTALLIKES +=1 :TOTALLIKES += 0;
+        }
         try {
             if (err) throw err;
-            res.render("master.ejs", { data: res_.reverse(), getDate });
+            TOTALPOSTS = res_.length;
+            if (res_.length > 0) {
+                let idx = res_.length - 1;
+                _id = res_[idx].post_id + 1;
+            } else _id = 1;
+            res.render("master.ejs", { data: res_.reverse(),TOTALPOSTS: TOTALPOSTS,TOTALBOOKMARKS: TOTALBOOKMARKS,TOTALLIKES:TOTALLIKES,USERNAME:USERNAME,USERID:USERID, getDate });
         } catch (err) {
             res.send(err);
         }
     });
+
+    
 });
 
 
@@ -117,7 +140,7 @@ app.post("/:id/update", (req, res) => {
     let { data } = req.body;
     val_ = [data, id];
     update("imanmay2","post_text",val_,res);
-})
+});
 
 
 //DELETE POST ROUTE.
@@ -139,12 +162,26 @@ app.post("/:id/delete", (req, res) => {
 
 //SIGNUP ROUTE.
 app.get("/signup",(req,res)=>{
+    connection.query("create table if not exists userdetails(name varchar(50),userid varchar(50),password varchar(80));");
     res.render("sign.ejs",{property: "Sign Up"});
 });
 
 //SIGNIN ROUTE.
 app.get("/signin",(req,res)=>{
     res.render("sign.ejs",{property: "Sign In"});
+});
+
+
+app.post("/signinup",(req,res)=>{
+    let {name,userid,password}=req.body;
+    connection.query("INSERT INTO userdetails VALUES(?,?,?);",[name,userid,password],(err,res_)=>{
+        try{
+            if(err) throw err;
+            res.redirect("/");
+        } catch(err){
+            res.send(err);
+        }
+    });
 });
 
 
