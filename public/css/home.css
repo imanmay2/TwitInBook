@@ -73,7 +73,6 @@
   border-radius: 30px;
   color: rgb(0, 0, 0);
   box-shadow: -10px 15px 10px wheat;
-
 }
 
 .post_icons {
@@ -82,4 +81,29 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.dropdown-menu {
+  display: none;
+  position: relative;
+  list-style-type: none;
+  font-size: 20px;
+  margin-left: -50px;
+  z-index: 10;
+}
+
+.more:hover .dropdown-menu{
+  display: block;
+}
+
+.dropdown-menu ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.dropdown-menu ul li {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px;
 }
