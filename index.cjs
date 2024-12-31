@@ -127,3 +127,9 @@ app.post("/:id/delete", (req, res) => {
         }
     });
 });
+
+
+//SIGNUP ROUTE.
+app.get("/signup",(req,res)=>{
+    res.render("signup.ejs");
+});
