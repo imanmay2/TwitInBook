@@ -13,13 +13,30 @@ const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
 const mysql = require("mysql2");
 
+
 let _id = null;
 
+
+
+//Function for Date function.
 function getDate(date) {
     var date = new Date(date);
     date = date.toString().substring(4, 15);
     date = date.substring(0, 6) + "," + date.substring(6);
     return date.trim();
+}
+
+// function for Update command.
+function update(table_name,field,dataset,res){
+    let q1 = `UPDATE ${table_name} SET ${field}=? WHERE post_id=?`;
+    connection.query(q1, dataset, (err, _) => {
+        try {
+            if (err) throw err;
+            res.redirect("/");
+        } catch (err) {
+            res.send(err);
+        }
+    })
 }
 
 
@@ -54,7 +71,6 @@ app.listen(port, (req, res) => {
 //READ DATA ROUTE
 app.get("/", (req, res) => {
     let q1 = "SELECT * FROM imanmay2";
-
     connection.query(q1, (err, res_) => {
         try {
             if (err) throw err;
@@ -89,6 +105,8 @@ app.post("/post", (req, res) => {
 });
 
 
+
+
 //EDIT INFORMATION ROUTE.
 app.get("/:id/edit", (req, res) => {
     res.render("edit.ejs",{data: req.params.id});
@@ -99,21 +117,12 @@ app.get("/:id/edit", (req, res) => {
 app.post("/:id/update", (req, res) => {
     let { id } = req.params;
     let { data } = req.body;
-    let q1 = "UPDATE imanmay2 SET post_text=? WHERE post_id=?";
     val_ = [data, id];
-    connection.query(q1, val_, (err, res_) => {
-        try {
-            if (err) throw err;
-            res.redirect("/");
-        } catch (err) {
-            res.send(err);
-        }
-    })
+    update("imanmay2","post_text",val_,res);
 })
 
 
 //DELETE POST ROUTE.
-
 app.post("/:id/delete", (req, res) => {
     let q1 = "DELETE FROM imanmay2 WHERE post_id=?";
     let { id } = req.params;
@@ -129,6 +138,8 @@ app.post("/:id/delete", (req, res) => {
 });
 
 
+
+
 //SIGNUP ROUTE.
 app.get("/signup",(req,res)=>{
     res.render("sign.ejs",{property: "Sign Up"});
@@ -137,4 +148,42 @@ app.get("/signup",(req,res)=>{
 //SIGNIN ROUTE.
 app.get("/signin",(req,res)=>{
     res.render("sign.ejs",{property: "Sign In"});
+});
+
+
+
+//like
+app.get("/:id/like?isLiked=:n",(req,res)=>{
+    let {id}=req.params;
+    //isLiked -> old data in db
+    //we have to know the old data in order to decide whether to pass the 0 or 1 in the update function
+    let {n}=req.query;
+    update("imanmay2","isLiked",[(n=="1")?0:1,id],res);
+});
+
+
+//bookmark.
+app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
+    let {id}=req.params;
+    let {n}=req.query;
+    update("imanmay2","isBookmarked",[(n==1)?0:1,id],res);
+});
+
+
+
+//like
+app.get("/:id/like?isLiked=:n",(req,res)=>{
+    let {id}=req.params;
+    //isLiked -> old data in db
+    //we have to know the old data in order to decide whether to pass the 0 or 1 in the update function
+    let {n}=req.query;
+    update("imanmay2","isLiked",[(n=="1")?0:1,id],res);
+});
+
+
+//bookmark.
+app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
+    let {id}=req.params;
+    let {n}=req.query;
+    update("imanmay2","isBookmarked",[(n==1)?0:1,id],res);
 });

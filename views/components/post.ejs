@@ -6,29 +6,34 @@
             <%=i.name %>
          </b><i id="opacity"> @imanmay2</i> . <%=getDate(i.post_date) %>
       </div>
-      
-      <i class="material-icons" style="cursor: pointer;" id="more">more_vert <div class="dropdown-menu" id="dropdown-menu">
-         <ul>
-            <form action="/<%= i.post_id %>/edit" method="POST">
-               <li><button type="submit" style="all: unset;cursor: pointer;">Edit</button></li></form>
-            <form action="/<%= i.post_id %>/delete" method="POST">
-            <li><button type="submit" style="all: unset;cursor: pointer;">Delete</button></li></form>
-         </ul>
-      </div></i>
-      
 
+
+      <i class="material-icons" style="cursor: pointer;" id="more">more_vert <div class="dropdown-menu"
+            id="dropdown-menu">
+            <ul>
+               <form action="/<%= i.post_id %>/edit" method="POST">
+                  <li><button type="submit" style="all: unset;cursor: pointer;">Edit</button></li>
+               </form>
+               <form action="/<%= i.post_id %>/delete" method="POST">
+                  <li><button type="submit" style="all: unset;cursor: pointer;">Delete</button></li>
+               </form>
+            </ul>
+         </div></i>
    </div>
+
 
    <p class="post_para roboto-thin">
       <%=i.post_text %>
-   </p> <br> <br> <br>
+   </p> <br> <br><br>
    <div class="post_icons">
-      <i class="material-icons-outlined like">
+      <a href="/<%= i.post_id %>/like?isLiked=<%= i.isLiked%>" style="color: black;"><i class="<%= i.isLiked ? 'material-icons' : 'material-icons-outlined' %> like">
          thumb_up
-      </i><i class="material-icons share">
+      </i></a>
+      <a href="" style="color: black;"><i class="material-icons share">
          ios_share
-      </i><i class="material-icons bookmark">
-         bookmark_outlined
-      </i>
+      </i></a>
+      <a href="/<%= i.post_id %>/bookmark?isBookmarked=<%=i.isBookmarked%>" style="color: black;"><i class="material-icons bookmark">
+         <%= i.isBookmarked ? 'bookmark' : 'bookmark_outlined' %>
+      </i></a>
    </div>
 </div>
