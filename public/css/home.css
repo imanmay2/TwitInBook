@@ -36,6 +36,8 @@
   letter-spacing: 1px;
   margin-left: 38px;
   font-weight: 400 !important;
+  text-align: start;
+  white-space: preserve-breaks;
 }
 
 
