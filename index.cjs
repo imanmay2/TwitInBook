@@ -33,7 +33,7 @@ const connection = mysql.createConnection({
 
 
 if (connection) {
-    connection.query("create table if not exists imanmay2(post_id int(10),post_date date,name varchar(50) default \"Manmay Chakraborty\",post_text text,isBookmarked int(2),isLiked int(2));");
+    connection.query("create table if not exists imanmay2(post_id int(10),post_date date,name varchar(50) default \"Manmay Chakraborty\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);");
     console.log("CONNECTION IS SUCCESSFUL. ");
 
     //SETTING UP THE ID. 
@@ -71,8 +71,8 @@ app.get("/", (req, res) => {
 app.post("/post", (req, res) => {
     if (_id != null) {
         let { post_ } = req.body;
-        let q1 = "INSERT INTO imanmay2(post_id,post_date,post_text,IsBookmarked,IsLiked) VALUES(?,?,?,?,?)";
-        data_ = [_id, new Date(), post_.toString(), 0, 0];
+        let q1 = "INSERT INTO imanmay2(post_id,post_date,post_text) VALUES(?,?,?)";
+        data_ = [_id, new Date(), post_.toString()];
         _id = _id + 1;
         connection.query(q1, data_, (err, res_) => {
             try {
@@ -117,7 +117,8 @@ app.post("/:id/update", (req, res) => {
 app.post("/:id/delete", (req, res) => {
     let q1 = "DELETE FROM imanmay2 WHERE post_id=?";
     let { id } = req.params;
-    connection.query(q1, [id], (err, res_) => {
+    console.log(req.params);
+    connection.query(q1, [id.replace(/[${}]/g, '')], (err, res_) => {
         try {
             if (err) throw err;
             res.redirect("/");

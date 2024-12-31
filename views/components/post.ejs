@@ -9,10 +9,10 @@
       <i class="material-icons more">more_vert <div class="dropdown-menu">
          <ul>
             <li>Edit</li>
-            <li>Delete</li>
+            <li onclick="hiddenPostAction()">Delete</li>
          </ul>
       </div></i>
-      
+      <form id="hiddenPostAction" action="/${<%= i.post_id %>}/delete" method="POST" style="display: none;"></form>
 
    </div>
 
