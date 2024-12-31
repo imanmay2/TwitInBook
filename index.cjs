@@ -118,7 +118,7 @@ app.post("/:id/delete", (req, res) => {
     let q1 = "DELETE FROM imanmay2 WHERE post_id=?";
     let { id } = req.params;
     console.log(req.params);
-    connection.query(q1, [id.replace(/[${}]/g, '')], (err, res_) => {
+    connection.query(q1, [parseInt(id,10)], (err, res_) => {
         try {
             if (err) throw err;
             res.redirect("/");
