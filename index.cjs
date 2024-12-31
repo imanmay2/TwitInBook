@@ -131,5 +131,10 @@ app.post("/:id/delete", (req, res) => {
 
 //SIGNUP ROUTE.
 app.get("/signup",(req,res)=>{
-    res.render("signup.ejs");
+    res.render("sign.ejs",{property: "Sign Up"});
+});
+
+//SIGNIN ROUTE.
+app.get("/signin",(req,res)=>{
+    res.render("sign.ejs",{property: "Sign In"});
 });

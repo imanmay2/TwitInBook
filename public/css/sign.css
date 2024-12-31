@@ -1,9 +1,15 @@
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .signup_box{
-    height: 675px;
     background-color: whitesmoke;
     width: 480px;
     border-radius: 20px;
-    margin-top: 4px;
+    
     color:black;
     text-align: left;
     padding: 28px;
