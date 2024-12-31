@@ -16,8 +16,6 @@ const mysql = require("mysql2");
 
 let _id = null;
 
-
-
 //Function for Date function.
 function getDate(date) {
     var date = new Date(date);
@@ -74,7 +72,7 @@ app.get("/", (req, res) => {
     connection.query(q1, (err, res_) => {
         try {
             if (err) throw err;
-            res.render("master.ejs", { data: res_, getDate });
+            res.render("master.ejs", { data: res_.reverse(), getDate });
         } catch (err) {
             res.send(err);
         }
@@ -108,9 +106,9 @@ app.post("/post", (req, res) => {
 
 
 //EDIT INFORMATION ROUTE.
-app.get("/:id/edit", (req, res) => {
-    res.render("edit.ejs",{data: req.params.id});
-})
+// app.get("/:id/edit", (req, res) => {
+//     res.render("edit.ejs",{data: req.params.id});
+// })
 
 
 //UPDATE INFORMATION ROUTE.
@@ -162,6 +160,7 @@ app.get("/:id/like?isLiked=:n",(req,res)=>{
 });
 
 
+
 //bookmark.
 app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
     let {id}=req.params;
@@ -172,18 +171,18 @@ app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
 
 
 //like
-app.get("/:id/like?isLiked=:n",(req,res)=>{
+app.get("/:id/like",(req,res)=>{
     let {id}=req.params;
-    //isLiked -> old data in db
-    //we have to know the old data in order to decide whether to pass the 0 or 1 in the update function
-    let {n}=req.query;
-    update("imanmay2","isLiked",[(n=="1")?0:1,id],res);
+    let {isLiked}=req.query;
+    update("imanmay2","isLiked",[(isLiked=="1")?0:1,id],res);
 });
+
 
 
 //bookmark.
-app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
+app.get("/:id/bookmark",(req,res)=>{
     let {id}=req.params;
-    let {n}=req.query;
-    update("imanmay2","isBookmarked",[(n==1)?0:1,id],res);
+    let {isBookmarked}=req.query;
+    update("imanmay2","isBookmarked",[(isBookmarked==1)?0:1,id],res);
 });
+

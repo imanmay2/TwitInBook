@@ -1,0 +1,56 @@
+#overlay{
+    position: fixed; 
+    display: none !important; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay_container{
+    color: black;
+    background-color: wheat;
+    border-radius: 20px;
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px white;
+}
+
+
+.text_edit{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+.overlay_container button {
+    display: flex;
+    flex-direction: row;
+    background-color: wheat;
+    padding: 10px 25px 10px 25px;
+    border-radius: 20px;
+    font-size: 20px;
+    justify-self: end;
+    font-weight: 900;
+    margin-top: 25%;
+}
+
+.edit_text{
+    width:80%;
+    background-color: wheat;
+    border: none;
+    resize:none;
+    outline: none;
+}
+
