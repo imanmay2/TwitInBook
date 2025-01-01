@@ -145,8 +145,8 @@ app.post("/post", (req, res) => {
 //UPDATE INFORMATION ROUTE.
 app.post("/update", (req, res) => {
     // let { id } = req.params;
-    let { post_id,post_ } = req.body;
-    val_ = [post_,post_id];
+    let { post_id, post_ } = req.body;
+    val_ = [post_, post_id];
     update(USERID, "post_text", val_, res);
 });
 
@@ -176,7 +176,11 @@ app.get("/signup", (req, res) => {
 
 //SIGNIN ROUTE.
 app.get("/signin", (req, res) => {
-    res.render("sign.ejs", { property: "Sign In" });
+    if (isSignedIn) {
+        res.redirect("/");
+    } else {
+        res.render("sign.ejs", { property: "Sign In" });
+    }
 });
 
 
