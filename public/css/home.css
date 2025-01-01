@@ -16,7 +16,7 @@
   position: fixed;
 }
 
-#post_list{
+#post_list {
   height: 80vh;
   margin-top: 15%;
   overflow-y: auto;
@@ -63,11 +63,11 @@
 .user-details {
   display: flex;
   align-items: center;
-  
+
   gap: 5px
 }
 
-.post_metadata{
+.post_metadata {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -121,4 +121,18 @@
   font-family: Arial, Helvetica, sans-serif;
   padding: 5px;
   cursor: pointer;
+}
+
+@media(max-width: 1270px) {
+  .home_container {
+    min-width: 100%;
+    width: 100px;
+  }
+}
+
+@media(max-width:990px){
+  .home_container{
+    min-width: 100%;
+    width: 450px;
+  }
 }
