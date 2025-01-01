@@ -8,8 +8,8 @@
   margin-top: 12px;
   margin-right: 10px;
   padding-right: 10px;
-  min-width: 45%;
-  width: 500px;
+  min-width: 120%;
+  width: 0;
 }
 
 .heading {
@@ -22,6 +22,7 @@
   overflow-y: auto;
   margin-left: -30px;
   padding-left: 25px;
+  width: 100%;
 }
 
 .playwrite-co-guides-regular {
@@ -43,6 +44,7 @@
   font-weight: 400 !important;
   text-align: start;
   white-space: preserve-breaks;
+
 }
 
 
