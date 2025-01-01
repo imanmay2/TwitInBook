@@ -20,3 +20,15 @@ sidebarItems.forEach(item => {
         }
     });
 });
+
+const logout = document.getElementById('logout');
+logout.addEventListener('click',()=>{
+    function preventBack() {
+        window.history.forward();
+    }
+    setTimeout(preventBack(), 0);
+    window.onunload = function () {
+        null
+    };
+    window.location.href = '/logout';
+});

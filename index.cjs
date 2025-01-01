@@ -135,13 +135,6 @@ app.post("/post", (req, res) => {
 
 
 
-
-//EDIT INFORMATION ROUTE.
-// app.get("/:id/edit", (req, res) => {
-//     res.render("edit.ejs",{data: req.params.id});
-// })
-
-
 //UPDATE INFORMATION ROUTE.
 app.post("/update", (req, res) => {
     // let { id } = req.params;
@@ -221,3 +214,14 @@ app.get("/:id/bookmark", (req, res) => {
     update(USERID, "isBookmarked", [(isBookmarked == 1) ? 0 : 1, id], res);
 });
 
+
+app.get("/logout",(req,res)=>{
+    res.redirect("/signin");
+    isSignedIn = false;
+    USERNAME = '';
+    USERID = '';
+    USER_PASSWORD = '';
+    TOTALBOOKMARKS = 0;
+    TOTALLIKES = 0 ;
+    TOTALPOSTS = 0;
+});
