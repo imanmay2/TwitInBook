@@ -71,37 +71,39 @@ app.get("/", (req, res) => {
     else {
         TOTALBOOKMARKS = 0;
         TOTALLIKES = 0;
-        connection.query("SELECT * FROM userdetails", (err, result_) => {
+        connection.query("SELECT * FROM userdetails where userid=?;", [USERID], (err, result_) => {
             try {
                 if (err) throw err;
-                if (USERID != result_[0].userid && USER_PASSWORD != result_[0].password) {
-                    res.redirect("/signin");
-                } else {
-                    USERNAME = result_[0].name;
-                }
-            } catch (err) {
-                res.send(err);
-            }
-        });
-        connection.query(`create table if not exists ${USERID}(post_id int(10),post_date date,name varchar(50) default \"${USERNAME}\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);`);
-        let q1 = `SELECT * FROM ${USERID}`;
-        connection.query(q1, (err, res_) => {
-            if (res_.length > 0) {
-                for (let i of res_) {
-                    if (i.isBookmarked) {
-                        TOTALBOOKMARKS += 1;
+                if (result_.length > 0) {
+                    if (USER_PASSWORD != result_[0].password) {
+                        isSignedIn = false;
+                        res.redirect("/signin");
+                    } else {
+                        USERNAME = result_[0].name;
+                        connection.query(`create table if not exists ${USERID}(post_id int(10),post_date date,name varchar(50) default \"${USERNAME}\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);`);
+                        connection.query(`SELECT * FROM ${USERID}`, (err, res_) => {
+                            if (res_.length > 0) {
+                                for (let i of res_) {
+                                    if (i.isBookmarked) {
+                                        TOTALBOOKMARKS += 1;
+                                    }
+                                    i.isLiked ? TOTALLIKES += 1 : TOTALLIKES += 0;
+                                }
+                            }
+                            try {
+                                if (err) throw err;
+                                TOTALPOSTS = res_.length;
+                                if (res_.length > 0) {
+                                    let idx = res_.length - 1;
+                                    _id = res_[idx].post_id + 1;
+                                } else _id = 1;
+                                res.render("master.ejs", { data: res_.reverse(), TOTALPOSTS: TOTALPOSTS, TOTALBOOKMARKS: TOTALBOOKMARKS, TOTALLIKES: TOTALLIKES, USERNAME: USERNAME, USERID: USERID, getDate });
+                            } catch (err) {
+                                res.send(err);
+                            }
+                        });
                     }
-                    i.isLiked ? TOTALLIKES += 1 : TOTALLIKES += 0;
-                }
-            }
-            try {
-                if (err) throw err;
-                TOTALPOSTS = res_.length;
-                if (res_.length > 0) {
-                    let idx = res_.length - 1;
-                    _id = res_[idx].post_id + 1;
-                } else _id = 1;
-                res.render("master.ejs", { data: res_.reverse(), TOTALPOSTS: TOTALPOSTS, TOTALBOOKMARKS: TOTALBOOKMARKS, TOTALLIKES: TOTALLIKES, USERNAME: USERNAME, USERID: USERID, getDate });
+                } else { isSignedIn = false; res.redirect("/signin") };
             } catch (err) {
                 res.send(err);
             }
@@ -215,13 +217,13 @@ app.get("/:id/bookmark", (req, res) => {
 });
 
 
-app.get("/logout",(req,res)=>{
+app.get("/logout", (req, res) => {
     res.redirect("/signin");
     isSignedIn = false;
     USERNAME = '';
     USERID = '';
     USER_PASSWORD = '';
     TOTALBOOKMARKS = 0;
-    TOTALLIKES = 0 ;
+    TOTALLIKES = 0;
     TOTALPOSTS = 0;
 });
