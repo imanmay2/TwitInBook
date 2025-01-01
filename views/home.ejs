@@ -14,7 +14,9 @@
                      <br>
                   <% } %>
                <% } %>
-               <%- include('components/edit_create',{refTitle: "Save" }) %>
+               <% if(page != "Fav" && !isCreate) { %>
+                  <%- include('components/edit_create',{refTitle: "Save" }) %>
+               <% } %>
             </div>
             <br>
 

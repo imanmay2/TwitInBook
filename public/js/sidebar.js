@@ -11,16 +11,12 @@ sidebarItems.forEach(item => {
         
         if (targetComponent) {
             targetComponent.style.display = "block";
-            if(section == "create"){
-                const overlay = document.getElementById("overlay");
-                overlay.style.display = '';
-                const cancel = document.querySelector('#cancel');
-                console.log(cancel);     
-                cancel.addEventListener('click', () => {
-                    console.log("Clicked");
-                    overlay.style.display = 'none';
-                });
-            }
+            const overlay = targetComponent.children[1];
+            overlay.style.display = '';
+            const cancel = overlay.querySelector("#cancel");
+            cancel.addEventListener('click',()=>{
+                overlay.style.display = 'none';
+            });
         }
     });
 });
