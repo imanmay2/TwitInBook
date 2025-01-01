@@ -1,16 +1,20 @@
 <div id="overlay">
-
     <div class="overlay_container">
-        <!-- top bar -> cancel button  -->
-        <i class="material-icons close" id="cancel">close</i>
-        <br> <br>
-        <!-- icon and textarea -->
-        <div class="text_edit">
-            <img src="https://images.unsplash.com/photo-1725714834773-b5f278346915?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="some image" style="height:40px;width:40px;border-radius:50%;">
-            <textarea name="edit_text" class="edit_text"></textarea>
-        </div>
-        <!-- save -->
-
-        <button>Save</button>
+        <form action="/<%= refTitle == 'Post' ? 'post' : 'update' %>" method="POST">
+            <input type="text" name="post_id" id="postID" style="display: none;">
+            <!-- top bar -> cancel button  -->
+            <i class="material-icons close" id="cancel">close</i>
+            <br> <br>
+            <!-- icon and textarea -->
+            <div class="text_edit">
+                <img src="https://images.unsplash.com/photo-1725714834773-b5f278346915?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="some image" style="height:40px;width:40px;border-radius:50%; margin-right: 10px;">
+                <textarea name="post_" class="edit_text" id="edit_text"></textarea>
+            </div>
+            <!-- save -->
+            <button type="submit">
+                <%= refTitle %>
+            </button>
+        </form>
     </div>
 </div>

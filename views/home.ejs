@@ -1,15 +1,23 @@
-<body>
+<div class="extraSidebar">
    <div class="home_container" id="home_container">
-      <h1 class="heading"> Your Posts</h1>
-      <br>
-      <div id="post_list">
-      <% for(let i of data){ %>
-         <%- include("./components/post",{i:i}) %>
-         <br>
-         
-     <% } %>
-   </div>
-      <br>
+      <h1 class="heading">
+         <%= page=="Home" ? 'Your Posts' : 'Favourite' %> </h1>
+            <br>
+            <div id="post_list">
+               <% for(let i of data){ %>
+                  <% if(page=="Fav" && i.isBookmarked){ %>
+                     <%- include("./components/post",{i:i}) %>
+                     <br>
+                  <% } %>
+                  <% if(page=="Home" ) { %>
+                     <%- include("./components/post",{i:i}) %>
+                     <br>
+                  <% } %>
+               <% } %>
+               <%- include('components/edit_create',{refTitle: "Save" }) %>
+            </div>
+            <br>
 
    </div>
-</body>
+   <%- include('rightbar') %>
+</div>

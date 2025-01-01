@@ -20,6 +20,10 @@ posts.forEach(post => {
         });
 
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        const edit_POST = document.getElementById('edit_POST');
+        edit_POST.addEventListener('click',()=>{
+        })
+
     });
 });
 
@@ -30,13 +34,9 @@ document.addEventListener('click', () => {
 });
 
 
-const edit_POST = document.getElementById('edit_POST');
-const overlay = document.getElementById('overlay');
-const cancel = document.getElementById('cancel');
-overlay.style.display = 'none';
-edit_POST.addEventListener('click',()=>{
-    overlay.style.display = 'flex !important';
-})
-cancel.addEventListener('click',()=>{
-    overlay.style.display = 'none !important';
-})
+// const cancel = document.getElementById('cancel');
+// overlay.style.display = 'none';
+
+// cancel.addEventListener('click',()=>{
+//     overlay.style.display = 'none !important';
+// })

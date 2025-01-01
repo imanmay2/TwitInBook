@@ -1,3 +1,7 @@
+.extraSidebar {
+  display: flex;
+}
+
 .home_container {
   margin-left: 20px;
   padding-left: 25px;
@@ -5,6 +9,7 @@
   margin-right: 10px;
   padding-right: 10px;
   min-width: 45%;
+  width: 30rem;
 }
 
 .heading {
@@ -73,6 +78,10 @@
   border-radius: 30px;
   color: rgb(0, 0, 0);
   box-shadow: -10px 15px 10px wheat;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .post_icons {

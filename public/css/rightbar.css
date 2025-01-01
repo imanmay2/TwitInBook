@@ -7,20 +7,10 @@
   border-left-color: rgba(255, 254, 254, 0.495);
 }
 
-/* .search{
-    border-radius: 30px;
-    height:36px;
-    width: 302px;
-    background-color: rgb(49, 50, 50);
-    color: white;
-} */
-
 .whats_happening {
   background-color: black;
   color: white;
   border: none !important;
-  /* border-color:azure;
-    border-radius: 30px; */
   font-size: 20px;
   resize: none;
   max-height: 60vh;

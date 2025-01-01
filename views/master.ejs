@@ -28,10 +28,12 @@
 <body>
     <div class="components">
         <%- include('sidebar') %>
-        <%- include('components/profile') %>
-
-    
-
+        <div id="home" class="component"><%- include('home',{page: 'Home'}) %></div>
+        <div id="search" style="display: none;" class="component"></div>
+        <div id="favourite" style="display: none;" class="component"><%- include('home',{page: 'Fav'}) %></div>
+        <div id="create" style="display: none;" class="component"><%- include('home',{page: 'Home'}) %>
+            <%- include('components/edit_create',{refTitle: "Post"}) %></div>
+        <div id="profile" style="display: none;" class="component"><%- include('components/profile') %></div>
     </div>
     
 
@@ -39,4 +41,5 @@
 <script src="/js/rightbar.js"></script>
 <script src="/js/home.js"></script>
 <script src="/js/sidebar.js"></script>
+<script src="/js/edit_create.js"></script>
 </html>

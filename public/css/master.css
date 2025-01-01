@@ -1,6 +1,6 @@
-body{
+body {
     background-color: black;
-    font-weight:200;
+    font-weight: 200;
     color: blanchedalmond;
     overflow: hidden;
 }
@@ -10,5 +10,3 @@ body{
     flex-direction: row;
     justify-content: flex-start;
 }
-
-

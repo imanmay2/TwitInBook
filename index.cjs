@@ -20,6 +20,8 @@ let TOTALLIKES = 0;
 let TOTALBOOKMARKS = 0;
 let USERNAME = "";
 let USERID = "";
+let USER_PASSWORD = "";
+let isSignedIn = false;
 
 //Function for Date function.
 function getDate(date) {
@@ -30,7 +32,7 @@ function getDate(date) {
 }
 
 // function for Update command.
-function update(table_name,field,dataset,res){
+function update(table_name, field, dataset, res) {
     let q1 = `UPDATE ${table_name} SET ${field}=? WHERE post_id=?`;
     connection.query(q1, dataset, (err, _) => {
         try {
@@ -53,7 +55,6 @@ const connection = mysql.createConnection({
 
 
 if (connection) {
-    connection.query("create table if not exists imanmay2(post_id int(10),post_date date,name varchar(50) default \"Manmay Chakraborty\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);");
     console.log("CONNECTION IS SUCCESSFUL. ");
 
 }
@@ -66,40 +67,47 @@ app.listen(port, (req, res) => {
 
 //READ DATA ROUTE
 app.get("/", (req, res) => {
-    TOTALBOOKMARKS=0;
-    TOTALLIKES=0;
-    connection.query("SELECT * FROM userdetails",(err,result_)=>{
-        try{
-            if(err) throw err;
-            USERNAME = result_[0].name;
-            USERID = result_[0].userid;
-        } catch(err){
-            res.send(err);
-        }
-    });
-    let q1 = "SELECT * FROM imanmay2";
-    connection.query(q1, (err, res_) => {
-        // console.log(res_);
-        for(let i of res_){
-            if(i.isBookmarked){
-                TOTALBOOKMARKS+=1;
+    if (!isSignedIn) res.redirect("/signin");
+    else {
+        TOTALBOOKMARKS = 0;
+        TOTALLIKES = 0;
+        connection.query("SELECT * FROM userdetails", (err, result_) => {
+            try {
+                if (err) throw err;
+                if (USERID != result_[0].userid && USER_PASSWORD != result_[0].password) {
+                    res.redirect("/signin");
+                } else {
+                    USERNAME = result_[0].name;
+                }
+            } catch (err) {
+                res.send(err);
             }
-            i.isLiked ? TOTALLIKES +=1 :TOTALLIKES += 0;
-        }
-        try {
-            if (err) throw err;
-            TOTALPOSTS = res_.length;
+        });
+        connection.query(`create table if not exists ${USERID}(post_id int(10),post_date date,name varchar(50) default \"${USERNAME}\",post_text text,isBookmarked int(2) default 0,isLiked int(2) default 0);`);
+        let q1 = `SELECT * FROM ${USERID}`;
+        connection.query(q1, (err, res_) => {
             if (res_.length > 0) {
-                let idx = res_.length - 1;
-                _id = res_[idx].post_id + 1;
-            } else _id = 1;
-            res.render("master.ejs", { data: res_.reverse(),TOTALPOSTS: TOTALPOSTS,TOTALBOOKMARKS: TOTALBOOKMARKS,TOTALLIKES:TOTALLIKES,USERNAME:USERNAME,USERID:USERID, getDate });
-        } catch (err) {
-            res.send(err);
-        }
-    });
+                for (let i of res_) {
+                    if (i.isBookmarked) {
+                        TOTALBOOKMARKS += 1;
+                    }
+                    i.isLiked ? TOTALLIKES += 1 : TOTALLIKES += 0;
+                }
+            }
+            try {
+                if (err) throw err;
+                TOTALPOSTS = res_.length;
+                if (res_.length > 0) {
+                    let idx = res_.length - 1;
+                    _id = res_[idx].post_id + 1;
+                } else _id = 1;
+                res.render("master.ejs", { data: res_.reverse(), TOTALPOSTS: TOTALPOSTS, TOTALBOOKMARKS: TOTALBOOKMARKS, TOTALLIKES: TOTALLIKES, USERNAME: USERNAME, USERID: USERID, getDate });
+            } catch (err) {
+                res.send(err);
+            }
+        });
+    }
 
-    
 });
 
 
@@ -108,7 +116,7 @@ app.get("/", (req, res) => {
 app.post("/post", (req, res) => {
     if (_id != null) {
         let { post_ } = req.body;
-        let q1 = "INSERT INTO imanmay2(post_id,post_date,post_text) VALUES(?,?,?)";
+        let q1 = `INSERT INTO ${USERID}(post_id,post_date,post_text) VALUES(?,?,?)`;
         data_ = [_id, new Date(), post_.toString()];
         _id = _id + 1;
         connection.query(q1, data_, (err, res_) => {
@@ -135,19 +143,19 @@ app.post("/post", (req, res) => {
 
 
 //UPDATE INFORMATION ROUTE.
-app.post("/:id/update", (req, res) => {
-    let { id } = req.params;
-    let { data } = req.body;
-    val_ = [data, id];
-    update("imanmay2","post_text",val_,res);
+app.post("/update", (req, res) => {
+    // let { id } = req.params;
+    let { post_id,post_ } = req.body;
+    val_ = [post_,post_id];
+    update(USERID, "post_text", val_, res);
 });
 
 
 //DELETE POST ROUTE.
 app.post("/:id/delete", (req, res) => {
-    let q1 = "DELETE FROM imanmay2 WHERE post_id=?";
+    let q1 = `DELETE FROM ${USERID} WHERE post_id=?`;
     let { id } = req.params;
-    connection.query(q1, [parseInt(id,10)], (err, res_) => {
+    connection.query(q1, [parseInt(id, 10)], (err, res_) => {
         try {
             if (err) throw err;
             res.redirect("/");
@@ -161,64 +169,51 @@ app.post("/:id/delete", (req, res) => {
 
 
 //SIGNUP ROUTE.
-app.get("/signup",(req,res)=>{
+app.get("/signup", (req, res) => {
     connection.query("create table if not exists userdetails(name varchar(50),userid varchar(50),password varchar(80));");
-    res.render("sign.ejs",{property: "Sign Up"});
+    res.render("sign.ejs", { property: "Sign Up" });
 });
 
 //SIGNIN ROUTE.
-app.get("/signin",(req,res)=>{
-    res.render("sign.ejs",{property: "Sign In"});
+app.get("/signin", (req, res) => {
+    res.render("sign.ejs", { property: "Sign In" });
 });
 
 
-app.post("/signinup",(req,res)=>{
-    let {name,userid,password}=req.body;
-    connection.query("INSERT INTO userdetails VALUES(?,?,?);",[name,userid,password],(err,res_)=>{
-        try{
-            if(err) throw err;
-            res.redirect("/");
-        } catch(err){
-            res.send(err);
-        }
-    });
-});
-
-
-
-//like
-app.get("/:id/like?isLiked=:n",(req,res)=>{
-    let {id}=req.params;
-    //isLiked -> old data in db
-    //we have to know the old data in order to decide whether to pass the 0 or 1 in the update function
-    let {n}=req.query;
-    update("imanmay2","isLiked",[(n=="1")?0:1,id],res);
-});
-
-
-
-//bookmark.
-app.get("/:id/bookmark?isBookmarked=:n",(req,res)=>{
-    let {id}=req.params;
-    let {n}=req.query;
-    update("imanmay2","isBookmarked",[(n==1)?0:1,id],res);
+app.post("/signinup", (req, res) => {
+    let { name, userid, password } = req.body;
+    if (name == undefined) {
+        isSignedIn = true;
+        USERID = userid;
+        USER_PASSWORD = password
+        res.redirect("/");
+    } else {
+        connection.query("INSERT INTO userdetails VALUES(?,?,?);", [name, userid, password], (err, res_) => {
+            try {
+                if (err) throw err;
+                res.redirect("/");
+            } catch (err) {
+                res.send(err);
+            }
+        });
+    }
 });
 
 
 
 //like
-app.get("/:id/like",(req,res)=>{
-    let {id}=req.params;
-    let {isLiked}=req.query;
-    update("imanmay2","isLiked",[(isLiked=="1")?0:1,id],res);
+app.get("/:id/like", (req, res) => {
+    let { id } = req.params;
+    let { isLiked } = req.query;
+    update(USERID, "isLiked", [(isLiked == "1") ? 0 : 1, id], res);
 });
 
 
 
 //bookmark.
-app.get("/:id/bookmark",(req,res)=>{
-    let {id}=req.params;
-    let {isBookmarked}=req.query;
-    update("imanmay2","isBookmarked",[(isBookmarked==1)?0:1,id],res);
+app.get("/:id/bookmark", (req, res) => {
+    let { id } = req.params;
+    let { isBookmarked } = req.query;
+    update(USERID, "isBookmarked", [(isBookmarked == 1) ? 0 : 1, id], res);
 });
 
